@@ -1,0 +1,76 @@
+from array import array
+import random
+
+def two_Sum(arr, target):
+    n = len(arr)
+    
+    for i in range(n - 1):
+        for j in range(i + 1, n):
+            if arr[i] + arr[j] == target:
+                print("answer found at index", i ,"value1:" ,arr[i], "value 2:", arr[j])
+                print(arr[i]," + ", arr[j]," = ", target)
+                return
+
+"""
+Thought Process:
+using a similar approach to a simple bubble sorting algorithm 
+where you iterate through checking each value(s) addition against
+the target value 
+
+Pro: Bubble sort works well smaller data sets
+Cons: time complexity for any larger data sets
+
+Could also use Insertion sort since there is a sub array ??
+
+Update 1:
+Bubble sort approach not succesful due to, only checking casses next to each other
+instead of cases against the whole array
+
+for i in range(n):
+        for j in range(0, n - i - 1):
+            if(arr[j] + arr[j + 1] == target):
+                print("answer found at index", j ,"value1:" ,arr[j], "value 2:", arr[j + 1])
+                print(arr[j]," + ", arr[j + 1]," = ", target)
+                return
+
+Array:  [60, 58, 93, 46, 86, 90, 24, 52, 59, 61]
+Target is 119 created from indices 0 and 8
+not found
+
+failed test case for bubble sort approach
+
+
+
+Array:  [82, 37, 67, 37, 62, 78, 68, 64, 32, 16]
+Target is 132 created from indices 7 and 6
+answer found at index 6 value1: 68 value 2: 64
+68  +  64  =  132
+
+passed test case for bubble sort approach 
+
+
+Update 2:
+Code working now 
+Modified the loop range to range(n - 1) in the outer loop to ensure 
+that the last element is not considered, avoiding unnecessary comparisons.
+Adjusted the inner loop range to range(i + 1, n) to ensure comparisions of 
+distinct indices.
+
+"""
+
+#driver code
+
+arr = [random.randint(1,100) for _ in range(10)]
+print("Array: ", arr)
+
+index1 = random.randint(0, len(arr) - 1)
+index2 = random.randint(0, len(arr) - 1)
+while index1 == index2:
+    index2 = random.randint(0, len(arr) - 1)
+
+target = arr[index1] + arr[index2]
+print("Target is", target, "created from indices", index1, "and", index2)
+two_Sum(arr, target)
+
+
+
